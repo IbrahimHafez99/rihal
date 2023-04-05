@@ -16,57 +16,27 @@ const Searcher = ({ initialValue }: { initialValue?: string }): JSX.Element => {
 
   return (
     <form className="flex items-center" onSubmit={handleSearch}>
-      <label htmlFor="simple-search" className="sr-only">
-        Search
-      </label>
-      <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg
-            aria-hidden="true"
-            className="w-5 h-5 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </div>
+      <div className="pt-2 relative mx-auto text-gray-600">
         <input
-          type="text"
-          id="simple-search"
-          className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 
-                    focus:border-purple-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                    dark:focus:ring-purple-500 dark:focus:border-purple-500"
+          className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          type="search"
+          name="search"
           placeholder="Search"
-          required
-          onChange={handleInputChange}
-          value={query}
         />
+        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            {" "}
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />{" "}
+          </svg>
+        </button>
       </div>
-      <button
-        type="submit"
-        className="p-2.5 ml-2 text-sm font-medium text-white bg-purple-700 rounded-lg border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-      >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          ></path>
-        </svg>
-        <span className="sr-only">Search</span>
-      </button>
     </form>
   );
 };
