@@ -5,7 +5,7 @@ import { BsCalendarDate } from "react-icons/bs";
 import { data } from "../dummy";
 import type { BikeTheft } from "../dummy";
 import { useParams } from "react-router-dom";
-
+import ResultCard from "../components/ResultCard";
 type Props = {};
 type formData = {
   from: string;
@@ -18,7 +18,12 @@ const ResultsPage = (props: Props) => {
 
   const [content, setContent] = useState<BikeTheft[]>();
   const [searchFilteredData, setSearchFilteredData] = useState<BikeTheft[]>(
-    data.filter((e) => e.caseTitle.split(" ").includes(query!))
+    data.filter((e) =>
+      e.caseTitle
+        .split(" ")
+        .map((e) => e.toLowerCase())
+        .includes(query?.toLowerCase()!)
+    )
   );
   const [formData, setFormData] = useState<formData>({
     from: "",
@@ -32,10 +37,9 @@ const ResultsPage = (props: Props) => {
       [event.target.name]: event.target.value,
     }));
   };
-  console.log("content", content);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(searchFilteredData);
     if (Object.values(formData).every((e) => e === "")) {
       setContent(searchFilteredData);
     } else {
@@ -61,8 +65,8 @@ const ResultsPage = (props: Props) => {
     }
   };
   return (
-    <main className="min-h-screen h-1 bg-[#f1f2f8] p-2">
-      <div className="w-full h-[35%] mb-4 bg-red-500 rounded-lg overflow-hidden">
+    <main className="min-h-screen bg-[#f1f2f8] p-2">
+      <div className="w-full h-[300px] md:h-[200px] mb-4 rounded-lg overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=822&q=80"
           alt="bike"
@@ -81,7 +85,7 @@ const ResultsPage = (props: Props) => {
                 name="location"
                 id="location"
                 type="text"
-                className="my-input focus:outline-none w-full"
+                className="my-input focus:outline-none w-full focus:border-b-[1px]"
                 onChange={handleFormChange}
               />
             </div>
@@ -131,9 +135,27 @@ const ResultsPage = (props: Props) => {
         </div>
       </form>
       {content && content.length === 0 ? (
-        <p>NO CONTENT FOUND</p>
+        <h1 className="mt-5 font-medium text-xl">NO CONTENT FOUND</h1>
       ) : (
-        <p>HERE IS THE BIKE THEFT</p>
+        <div className="">
+          <h1 className="font-medium text-xl my-5">
+            {searchFilteredData.length} Theft Founds
+          </h1>
+          <div className="flex flex-wrap">
+            {searchFilteredData.map((e) => (
+              <ResultCard
+                key={e.id}
+                name={e.caseTitle}
+                area={e.location}
+                date={e.theftDate}
+                lat={e.latitude}
+                lon={e.longitude}
+                description={e.description}
+                reported={e.reportDate}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </main>
   );

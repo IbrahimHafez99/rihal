@@ -4,7 +4,7 @@ const LandingPage = (): JSX.Element => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const handleSearch = () => {
-    navigate(`/search/  ${searchQuery}`);
+    navigate(`/search/${searchQuery}`);
   };
   return (
     <main className="min-h-screen bg-hero bg-no-repeat bg-cover bg-center relative h-1">
@@ -28,7 +28,7 @@ const LandingPage = (): JSX.Element => {
             <div className="bg-white rounded-full flex justify-between items-center p-2">
               <input
                 type="text"
-                className="rounded-full border-none outline-none px-4 min-w"
+                className="rounded-full border-none outline-none px-4 w-full"
                 placeholder="Bike"
                 value={searchQuery}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
