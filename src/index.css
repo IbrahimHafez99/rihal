@@ -11,4 +11,9 @@ body {
   font-family: "Readex Pro", sans-serif;
 }
 
-
+.my-input:-webkit-autofill,
+.my-input:-webkit-autofill:hover,
+.my-input:-webkit-autofill:focus,
+.my-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
