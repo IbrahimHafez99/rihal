@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import { calculateStats } from "../lib/calculateStats";
-import BikeTheftChart from "../components/DateLineChart";
 import DateLineChart from "../components/DateLineChart";
 export interface LocationStatsType {
   labels: string[];

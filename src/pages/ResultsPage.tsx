@@ -6,32 +6,11 @@ import { data } from "../dummy";
 import type { BikeTheft } from "../dummy";
 import { useParams } from "react-router-dom";
 import ResultCard from "../components/ResultCard";
-import { motion } from "framer-motion";
 type Props = {};
 type formData = {
   from: string;
   to: string;
   location: string;
-};
-
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
 };
 
 const ResultsPage = (props: Props) => {
@@ -176,12 +155,7 @@ const ResultsPage = (props: Props) => {
           <h1 className="font-medium text-xl my-5">
             {searchFilteredData.length} Theft Founds
           </h1>
-          <motion.div
-            className="w-[90%] flex flex-wrap justify-start items-center gap-5  mx-auto"
-            variants={container}
-            initial="hidden"
-            animate="visible"
-          >
+          <div className="w-[90%] flex flex-wrap justify-start items-center gap-5  mx-auto">
             {searchFilteredData
               .slice(currentPage * 10 - 10, currentPage * 10)
               .map((e) => (
@@ -197,7 +171,7 @@ const ResultsPage = (props: Props) => {
                   reported={e.reportDate}
                 />
               ))}
-          </motion.div>
+          </div>
         </div>
       )}
       {/* pages */}

@@ -1,7 +1,6 @@
 import { Map, Marker } from "pigeon-maps";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { GrMapLocation } from "react-icons/gr";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 interface ResultCardProps {
@@ -15,13 +14,6 @@ interface ResultCardProps {
   reported: string;
 }
 
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
 
 const ResultCard = ({
   id,
@@ -37,10 +29,7 @@ const ResultCard = ({
     (new Date().getTime() - new Date(reported).getTime()) / (1000 * 3600 * 24)
   );
   return (
-    <motion.div
-      className="max-w-xs w-full md:w-1/2 bg-white shadow-lg rounded-lg overflow-hidden mx-auto md:m-0 mb-5 hover:cursor-pointer min-h-[476px]"
-      variants={item}
-    >
+    <div className="max-w-xs w-full md:w-1/2 bg-white shadow-lg rounded-lg overflow-hidden mx-auto md:m-0 mb-5 hover:cursor-pointer min-h-[476px]">
       <div className="bg-gray-400 h-64 w-full object-cover object-center">
         <Map
           defaultCenter={[lat, lon]}
@@ -76,7 +65,7 @@ const ResultCard = ({
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
