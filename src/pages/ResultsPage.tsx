@@ -6,6 +6,7 @@ import { data } from "../dummy";
 import type { BikeTheft } from "../dummy";
 import { useParams } from "react-router-dom";
 import ResultCard from "../components/ResultCard";
+import { motion } from "framer-motion";
 type Props = {};
 type formData = {
   from: string;
@@ -13,9 +14,29 @@ type formData = {
   location: string;
 };
 
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 const ResultsPage = (props: Props) => {
   const { query } = useParams();
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [content, setContent] = useState<BikeTheft[]>();
   const [searchFilteredData, setSearchFilteredData] = useState<BikeTheft[]>(
     data.filter((e) =>
@@ -36,6 +57,20 @@ const ResultsPage = (props: Props) => {
       ...prev,
       [event.target.name]: event.target.value,
     }));
+  };
+  console.log("current", currentPage);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => --prev);
+    }
+    console.log(currentPage);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(searchFilteredData.length / 10)) {
+      setCurrentPage((prev) => ++prev);
+    }
+    console.log(currentPage);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -134,27 +169,56 @@ const ResultsPage = (props: Props) => {
           </div>
         </div>
       </form>
-      {content && content.length === 0 ? (
+      {content?.length === 0 ? (
         <h1 className="mt-5 font-medium text-xl">NO CONTENT FOUND</h1>
       ) : (
         <div className="">
           <h1 className="font-medium text-xl my-5">
             {searchFilteredData.length} Theft Founds
           </h1>
-          <div className="flex flex-wrap">
-            {searchFilteredData.map((e) => (
-              <ResultCard
-                key={e.id}
-                name={e.caseTitle}
-                area={e.location}
-                date={e.theftDate}
-                lat={e.latitude}
-                lon={e.longitude}
-                description={e.description}
-                reported={e.reportDate}
-              />
-            ))}
-          </div>
+          <motion.div
+            className="w-[90%] flex flex-wrap justify-start items-center gap-5  mx-auto"
+            variants={container}
+            initial="hidden"
+            animate="visible"
+          >
+            {searchFilteredData
+              .slice(currentPage * 10 - 10, currentPage * 10)
+              .map((e) => (
+                <ResultCard
+                  key={e.id}
+                  id={e.id}
+                  name={e.caseTitle}
+                  area={e.location}
+                  date={e.theftDate}
+                  lat={e.latitude}
+                  lon={e.longitude}
+                  description={e.description}
+                  reported={e.reportDate}
+                />
+              ))}
+          </motion.div>
+        </div>
+      )}
+      {/* pages */}
+
+      {content?.length !== 0 && (
+        <div className="flex justify-center mt-5">
+          <button
+            onClick={handlePrevPage}
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Previous
+          </button>
+          <span className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            {currentPage}
+          </span>
+          <button
+            onClick={handleNextPage}
+            className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
         </div>
       )}
     </main>

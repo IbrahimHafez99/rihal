@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 export interface BikeTheft {
   id: string;
   caseTitle: string;
@@ -13,7 +11,7 @@ export interface BikeTheft {
 
 export const data: BikeTheft[] = [
   {
-    id: uuidv4(),
+    id: '1',
     caseTitle: "Stolen Mountain Bike",
     description:
       "A $3,000 full-suspension mountain bike was stolen from a garage in Prenzlauer Berg.",
@@ -24,10 +22,10 @@ export const data: BikeTheft[] = [
     longitude: 13.4242,
   },
   {
-    id: uuidv4(),
+    id: '2',
     caseTitle: "Bike Theft at the Park",
     description:
-      "A bike was stolen from a park in Neukölln while the owner was playing basketball.",
+      "A bike was stolen from a park in Neukölln while the owner was playing basketball A bike was stolen from a park.",
     theftDate: "2022-07-01",
     reportDate: "2022-07-02",
     location: "Neukölln",
@@ -35,7 +33,7 @@ export const data: BikeTheft[] = [
     longitude: 13.4445,
   },
   {
-    id: uuidv4(),
+    id: '3',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
@@ -46,7 +44,7 @@ export const data: BikeTheft[] = [
     longitude: 13.3041,
   },
   {
-    id: uuidv4(),
+    id: '4',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
@@ -57,7 +55,7 @@ export const data: BikeTheft[] = [
     longitude: 13.3041,
   },
   {
-    id: uuidv4(),
+    id: '5',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
@@ -68,7 +66,7 @@ export const data: BikeTheft[] = [
     longitude: 13.3041,
   },
   {
-    id: uuidv4(),
+    id: '6',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
@@ -79,7 +77,7 @@ export const data: BikeTheft[] = [
     longitude: 13.3041,
   },
   {
-    id: uuidv4(),
+    id: '7',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
@@ -90,7 +88,84 @@ export const data: BikeTheft[] = [
     longitude: 13.3041,
   },
   {
-    id: uuidv4(),
+    id: '8',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '9',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '10',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '11',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '12',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '13',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '14',
+    caseTitle: "Bike Shop Break-in",
+    description:
+      "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",
+    theftDate: "2022-09-10",
+    reportDate: "2022-09-11",
+    location: "Charlottenburg",
+    latitude: 52.5166,
+    longitude: 13.3041,
+  },
+  {
+    id: '15',
     caseTitle: "Bike Shop Break-in",
     description:
       "Thieves broke into a bike shop in Charlottenburg and stole several high-end road bikes.",

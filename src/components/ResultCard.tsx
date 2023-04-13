@@ -1,7 +1,11 @@
 import { Map, Marker } from "pigeon-maps";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { GrMapLocation } from "react-icons/gr";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 interface ResultCardProps {
+  id: string;
   name: string;
   description: string;
   area: string;
@@ -11,7 +15,16 @@ interface ResultCardProps {
   reported: string;
 }
 
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 const ResultCard = ({
+  id,
   name,
   description,
   area,
@@ -23,9 +36,11 @@ const ResultCard = ({
   const days = Math.ceil(
     (new Date().getTime() - new Date(reported).getTime()) / (1000 * 3600 * 24)
   );
-  console.log(new Date().getDay());
   return (
-    <div className="max-w-xs w-full md:w-1/2 bg-white shadow-lg rounded-lg overflow-hidden mx-auto mb-5">
+    <motion.div
+      className="max-w-xs w-full md:w-1/2 bg-white shadow-lg rounded-lg overflow-hidden mx-auto md:m-0 mb-5 hover:cursor-pointer min-h-[476px]"
+      variants={item}
+    >
       <div className="bg-gray-400 h-64 w-full object-cover object-center">
         <Map
           defaultCenter={[lat, lon]}
@@ -37,7 +52,9 @@ const ResultCard = ({
         </Map>
       </div>
       <div className="p-4">
-        <h1 className="text-gray-900 font-bold text-2xl mb-2">{name}</h1>
+        <Link className="inline-flex" to={`/theft/${id}`}>
+          <h1 className="text-gray-900 font-bold text-2xl mb-2">{name}</h1>
+        </Link>
         <p className="text-gray-600 text-sm">{description}</p>
         <div className="mt-3 flex items-center">
           <BsCalendar2DateFill className="text-lg mr-3" />
@@ -59,7 +76,7 @@ const ResultCard = ({
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
