@@ -1,6 +1,6 @@
 # rihal
 
-This is a React project that was initialized with Yarn. It is a simple web application that allow a user search and filter in a dataset that consist a bike theft cases.
+This is a React project that was initialized with Yarn. It is a simple web application that allow a user to search and filter in a dataset that consist a bike theft cases.
 
 ## Getting Started
 ### Prerequisites
