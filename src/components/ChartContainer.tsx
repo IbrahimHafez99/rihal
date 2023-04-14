@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 type Props = {
   children: React.ReactElement;
@@ -6,7 +6,7 @@ type Props = {
   content: string;
 };
 
-const MainChart = ({ children, content, title }: Props) => {
+const ChartContainer = ({ children, content, title }: Props) => {
   return (
     <div className="w-full md:w-1/2 lg:w-1/3 p-4">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col text-left justify-center items-center">
@@ -21,4 +21,4 @@ const MainChart = ({ children, content, title }: Props) => {
   );
 };
 
-export default MainChart;
+export default ChartContainer;

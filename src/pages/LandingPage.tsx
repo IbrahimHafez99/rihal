@@ -4,7 +4,8 @@ import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import { calculateStats } from "../lib/calculateStats";
 import DateLineChart from "../components/DateLineChart";
-import MainChart from "../components/MainChart";
+import ChartContainer from "../components/ChartContainer";
+import Searcher from "../components/Search";
 export interface LocationStatsType {
   labels: string[];
   datasets: {
@@ -14,20 +15,6 @@ export interface LocationStatsType {
 }
 const LandingPage = (): JSX.Element => {
   const { locs, groupedData } = calculateStats();
-  const data = {
-    labels: Object.keys(locs),
-    datasets: [
-      {
-        label: "Theft rate by country",
-        data: Object.values(locs).map((e) => e),
-      },
-    ],
-  };
-  const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
-  const handleSearch = () => {
-    navigate(`/search/${searchQuery}`);
-  };
   return (
     <main className="min-h-screen bg-hero bg-no-repeat bg-cover bg-center relative h-1">
       <div className="absolute bg-gradient-to-l from-blue-700 via-blue-800 to-gray-900 w-[100%] h-[100%] opacity-20"></div>
@@ -47,45 +34,29 @@ const LandingPage = (): JSX.Element => {
             web app
           </p>
           <form className="w-full max-w-xl mt-10">
-            <div className="bg-white rounded-full flex justify-between items-center p-2">
-              <input
-                type="text"
-                className="rounded-full border-none outline-none px-4 w-full"
-                placeholder="Bike"
-                value={searchQuery}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearchQuery(event.target.value)
-                }
-              />
-              <button
-                onClick={handleSearch}
-                className="text-white bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full px-4 py-2"
-              >
-                Search
-              </button>
-            </div>
+            <Searcher />
           </form>
         </div>
       </div>
-      <div className="flex flex-wrap  bg-[#e3e3e3] ">
-        <MainChart
+      <div className="flex flex-wrap bg-[#e3e3e3] ">
+        <ChartContainer
           title="Bar Chart"
           content="This is a placeholder for more explaination about the Bar Chart"
         >
-          <BarChart data={data} />
-        </MainChart>
-        <MainChart
+          <BarChart data={locs} />
+        </ChartContainer>
+        <ChartContainer
           title="Line Chart"
           content="This is a placeholder for more explaination about the Line Chart"
         >
           <DateLineChart data={groupedData} />
-        </MainChart>
-        <MainChart
+        </ChartContainer>
+        <ChartContainer
           title="Pie Chart"
           content="This is a placeholder for more explaination about the Pie Chart"
         >
-          <PieChart data={data} />
-        </MainChart>
+          <PieChart data={locs} />
+        </ChartContainer>
       </div>
     </main>
   );

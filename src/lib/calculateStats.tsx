@@ -1,6 +1,6 @@
 import { data } from "../dummy";
 import moment from "moment";
-type MyObject = {
+export type MyObject = {
   [key: string]: number;
 };
 export const calculateStats = () => {

@@ -7,7 +7,7 @@ import { data } from "../dummy";
 import type { BikeTheft } from "../dummy";
 import { useParams, Link } from "react-router-dom";
 import ResultCard from "../components/ResultCard";
-type Props = {};
+import Pagination from "../components/Pagination";
 
 type formData = {
   from: string;
@@ -15,11 +15,11 @@ type formData = {
   location: string;
 };
 
-const ResultsPage = (props: Props) => {
+const ResultsPage = (): JSX.Element => {
   const { query } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [content, setContent] = useState<BikeTheft[]>();
-  const [searchFilteredData, setSearchFilteredData] = useState<BikeTheft[]>(
+  const [searchFilteredData, _] = useState<BikeTheft[]>(
     data.filter((e) =>
       e.caseTitle
         .split(" ")
@@ -38,17 +38,6 @@ const ResultsPage = (props: Props) => {
       ...prev,
       [event.target.name]: event.target.value,
     }));
-  };
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => --prev);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < Math.ceil(searchFilteredData.length / 10)) {
-      setCurrentPage((prev) => ++prev);
-    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -176,26 +165,12 @@ const ResultsPage = (props: Props) => {
           </div>
         </div>
       )}
-      {/* pages */}
-
       {content?.length !== 0 && (
-        <div className="flex justify-center mt-5">
-          <button
-            onClick={handlePrevPage}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            Previous
-          </button>
-          <span className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            {currentPage}
-          </span>
-          <button
-            onClick={handleNextPage}
-            className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            Next
-          </button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          searchFilteredData={searchFilteredData}
+        />
       )}
     </main>
   );

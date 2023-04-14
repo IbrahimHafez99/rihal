@@ -1,43 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Searcher = ({ initialValue }: { initialValue?: string }): JSX.Element => {
-  const [query, setQuery] = useState(initialValue);
+const Searcher = (): JSX.Element => {
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate(`/search/${query}`);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+  const handleSearch = () => {
+    navigate(`/search/${searchQuery}`);
   };
 
   return (
-    <form className="flex items-center" onSubmit={handleSearch}>
-      <div className="pt-2 relative mx-auto text-gray-600">
-        <input
-          className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-          type="search"
-          name="search"
-          placeholder="Search"
-        />
-        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-search"
-            viewBox="0 0 16 16"
-          >
-            {" "}
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />{" "}
-          </svg>
-        </button>
-      </div>
-    </form>
+    <div className="bg-white rounded-full flex justify-between items-center p-2">
+      <input
+        type="text"
+        className="rounded-full border-none outline-none px-4 w-full"
+        placeholder="Bike"
+        value={searchQuery}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchQuery(event.target.value)
+        }
+      />
+      <button
+        onClick={handleSearch}
+        className="text-white bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full px-4 py-2"
+      >
+        Search
+      </button>
+    </div>
   );
 };
 

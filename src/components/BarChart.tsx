@@ -8,15 +8,24 @@ import {
 } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-import { LocationStatsType } from "../pages/LandingPage";
+import { MyObject } from "../lib/calculateStats";
 type Props = {
-  data: LocationStatsType;
+  data: MyObject;
 };
 
 const BarChart = ({ data }: Props) => {
+  const chartData = {
+    labels: Object.keys(data),
+    datasets: [
+      {
+        label: "Theft rate by country",
+        data: Object.values(data).map((e) => e),
+      },
+    ],
+  };
   return (
     <div>
-      <Bar data={data} />
+      <Bar data={chartData} />
     </div>
   );
 };
