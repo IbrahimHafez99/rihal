@@ -1,23 +1,13 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import { calculateStats } from "../lib/calculateStats";
-type Props = {};
-
-const PieChart = (props: Props) => {
-  const { locs } = calculateStats();
+import { LocationStatsType } from "../pages/LandingPage";
+type Props = {
+  data: LocationStatsType;
+};
+const PieChart = ({ data }: Props) => {
   return (
     <div>
-      <Pie
-        data={{
-          labels: Object.keys(locs),
-          datasets: [
-            {
-              label: "Theft rate by country",
-              data: Object.values(locs),
-            },
-          ],
-        }}
-      />
+      <Pie data={data} />
     </div>
   );
 };

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { ImLocation } from "react-icons/im";
 import { AiFillFilter } from "react-icons/ai";
 import { BsCalendarDate } from "react-icons/bs";
+import { AiOutlineHome } from "react-icons/ai";
 import { data } from "../dummy";
 import type { BikeTheft } from "../dummy";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ResultCard from "../components/ResultCard";
 type Props = {};
+
 type formData = {
   from: string;
   to: string;
@@ -37,19 +39,16 @@ const ResultsPage = (props: Props) => {
       [event.target.name]: event.target.value,
     }));
   };
-  console.log("current", currentPage);
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => --prev);
     }
-    console.log(currentPage);
   };
 
   const handleNextPage = () => {
     if (currentPage < Math.ceil(searchFilteredData.length / 10)) {
       setCurrentPage((prev) => ++prev);
     }
-    console.log(currentPage);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -80,12 +79,15 @@ const ResultsPage = (props: Props) => {
   };
   return (
     <main className="min-h-screen bg-[#f1f2f8] p-2">
-      <div className="w-full h-[300px] md:h-[200px] mb-4 rounded-lg overflow-hidden">
+      <div className="w-full h-[300px] md:h-[200px] mb-4 rounded-lg overflow-hidden relative">
         <img
           src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=822&q=80"
           alt="bike"
           className="w-full h-full object-cover"
         />
+        <Link to="/">
+          <AiOutlineHome className="text-7xl p-4 hover:cursor-pointer absolute text-white z-50 top-0 left-0" />
+        </Link>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="bg-white w-[90%] mt-[-80px] md:mt-[-50px] mx-auto relative z-10 md:rounded-full p-2 flex items-center justify-between flex-wrap rounded-lg md:gap-[1%] gap-[2%] gap-y-3 ">

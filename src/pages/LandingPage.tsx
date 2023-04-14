@@ -4,6 +4,7 @@ import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import { calculateStats } from "../lib/calculateStats";
 import DateLineChart from "../components/DateLineChart";
+import MainChart from "../components/MainChart";
 export interface LocationStatsType {
   labels: string[];
   datasets: {
@@ -12,7 +13,7 @@ export interface LocationStatsType {
   }[];
 }
 const LandingPage = (): JSX.Element => {
-  const { locs } = calculateStats();
+  const { locs, groupedData } = calculateStats();
   const data = {
     labels: Object.keys(locs),
     datasets: [
@@ -66,43 +67,25 @@ const LandingPage = (): JSX.Element => {
           </form>
         </div>
       </div>
-      <div className="flex flex-wrap justify-center bg-[#e3e3e3] ">
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col justify-center items-center">
-            <BarChart data={data} />
-            <div className="p-4">
-              <h2 className="text-lg font-bold text-gray-800 mb-2">Bar Chart</h2>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                pretium pretium tempor.{" "}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col justify-center items-center">
-            <DateLineChart />
-            <div className="p-4">
-              <h2 className="text-lg font-bold text-gray-800 mb-2">Line Chart</h2>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                pretium pretium tempor.{" "}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col justify-center items-center">
-            <PieChart />
-            <div className="p-4">
-              <h2 className="text-lg font-bold text-gray-800 mb-2">Pie Chart</h2>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                pretium pretium tempor.{" "}
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="flex flex-wrap  bg-[#e3e3e3] ">
+        <MainChart
+          title="Bar Chart"
+          content="This is a placeholder for more explaination about the Bar Chart"
+        >
+          <BarChart data={data} />
+        </MainChart>
+        <MainChart
+          title="Line Chart"
+          content="This is a placeholder for more explaination about the Line Chart"
+        >
+          <DateLineChart data={groupedData} />
+        </MainChart>
+        <MainChart
+          title="Pie Chart"
+          content="This is a placeholder for more explaination about the Pie Chart"
+        >
+          <PieChart data={data} />
+        </MainChart>
       </div>
     </main>
   );
